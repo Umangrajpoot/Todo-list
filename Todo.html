@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        li{
+            position: relative;
+            border: 1px solid black;
+            padding:5px;
+            list-style-type: none;
+            margin:4px;
+        }
+       .del{
+           position: absolute;
+           right:5px;
+           font-size: 20px;
+           font-weight: bolder;
+           top:3px;
+       }
+       .del:hover{
+           cursor: pointer;
+           color:red;
+           
+       }
+       </style>
+</head>
+<body>
+    <input type="text" name="item" id="item">
+    <button type="submit" onclick="addItem()">+</button>
+    <ul id="todoList">
+        <!-- <li>Item1 <span class="del">&#215;</span></li> -->
+        
+    </ul>
+    <script>
+        function addItem()
+        {
+            let inputValue = document.getElementById("item").value;
+            if(inputValue=="")
+            {
+                alert("Plese enter some task ");
+            }
+            else
+            {
+                let listItem = document.createElement("li");
+                let inputValueNode = document.createTextNode(inputValue)
+                listItem.appendChild(inputValueNode);
+                let ulList = document.getElementById("todoList");
+                ulList.appendChild(listItem);
+
+                let cross = document.createElement("span");
+                cross.className = "del";
+                let crossSymbol = document.createTextNode("\u00D7");
+                cross.appendChild(crossSymbol);
+
+                listItem.appendChild(cross);
+                document.getElementById("item").value = "";
+
+                let closeList = document.getElementsByClassName("del");
+                for(let i=0;i<closeList.length;i++)
+                {
+                    closeList[i].onclick = function(){
+                       let div=this.parentElement;
+                       div.style.display = "none";
+                    }
+                }
+
+            }
+            
+
+        }
+    </script>
+</body>
+</html>
